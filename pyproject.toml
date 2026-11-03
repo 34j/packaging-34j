@@ -1,0 +1,135 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools>=77.0.3" ]
+
+[project]
+name = "packaging-34j"
+version = "0.0.0"
+description = "Packaging tools and configuration for 34j Python projects."
+readme = "README.md"
+license = "MIT"
+authors = [
+  { name = "34j" },
+]
+requires-python = ">=3.12"
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Libraries",
+]
+urls."Bug Tracker" = "https://github.com/34j/packaging-34j/issues"
+urls.Changelog = "https://github.com/34j/packaging-34j/blob/main/CHANGELOG.md"
+urls.documentation = "https://packaging-34j.readthedocs.io"
+urls.repository = "https://github.com/34j/packaging-34j"
+
+[dependency-groups]
+dev = [
+  "coverage",
+  "pytest",
+  "pytest-cov",
+  "sybil[pytest]",
+  "ty",
+]
+docs = [
+  "furo",
+  "myst-parser",
+  "sphinx",
+  "sphinx-autobuild",
+  "sphinx-math-dollar",
+]
+
+[tool.ruff]
+line-length = 88
+lint.select = [
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "D",   # flake8-docstrings
+  "E",   # pycodestyle
+  "F",   # pyflake
+  "I",   # isort
+  "RUF", # ruff specific
+  "S",   # flake8-bandit
+  "UP",  # pyupgrade
+  "W",   # pycodestyle
+]
+lint.ignore = [
+  "D100", # Missing docstring in public module
+  "D104", # Missing docstring in public package
+  "D107", # Missing docstring in `__init__`
+  "D203", # 1 blank line required before class docstring
+  "D212", # Multi-line docstring summary should start at the first line
+  "D401", # First line of docstring should be in imperative mood
+]
+lint.per-file-ignores."conftest.py" = [ "D100" ]
+lint.per-file-ignores."docs/conf.py" = [ "D100" ]
+lint.per-file-ignores."setup.py" = [ "D100" ]
+lint.per-file-ignores."tests/**/*" = [
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "S101",
+]
+lint.isort.known-first-party = [ "packaging_34j", "tests" ]
+
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
+[tool.ty]
+terminal.error-on-warning = true
+
+[tool.pytest]
+minversion = "9.0"
+addopts = [
+  "-v",
+  "-Wonce",
+  "-p no:doctest",
+  "--cov=packaging_34j",
+  "--cov-report=term",
+  "--cov-report=xml",
+]
+pythonpath = [ "src" ]
+
+[tool.coverage]
+run.branch = true
+paths.source = [ "src" ]
+report.exclude_lines = [
+  "@overload",
+  'if __name__ == "__main__":',
+  "if TYPE_CHECKING",
+  "pragma: no cover",
+  "raise NotImplementedError",
+]
+
+[tool.semantic_release]
+version_toml = [ "pyproject.toml:project.version" ]
+version_variables = [
+  "src/packaging_34j/__init__.py:__version__",
+]
+build_command = """
+pip install uv
+uv lock
+git add uv.lock
+uv build
+"""
+branches.main.match = "main"
+branches.noop.match = "(?!main$)"
+branches.noop.prerelease = true
+changelog.exclude_commit_patterns = [
+  "chore(?:\\([^)]*?\\))?: .+",
+  "ci(?:\\([^)]*?\\))?: .+",
+  "refactor(?:\\([^)]*?\\))?: .+",
+  "style(?:\\([^)]*?\\))?: .+",
+  "test(?:\\([^)]*?\\))?: .+",
+  "build\\((?!deps\\): .+)",
+  "Merged? .*",
+  "Initial [Cc]ommit.*",         # codespell:ignore
+]
+changelog.environment.keep_trailing_newline = true
