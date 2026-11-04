@@ -4,7 +4,7 @@ requires = [ "setuptools>=77.0.3" ]
 
 [project]
 name = "packaging-34j"
-version = "1.1.1"
+version = "1.1.2"
 description = "Packaging tools and configuration for 34j Python projects."
 readme = "README.md"
 license = "MIT"
@@ -48,6 +48,7 @@ package-data.packaging_34j = [
   "ruff.toml",
   "semantic_release.toml",
 ]
+data-files."" = [ "src/packaging_34j/ruff.toml" ]
 
 [tool.ruff]
 extend = ".venv/../src/packaging_34j/ruff.toml"
