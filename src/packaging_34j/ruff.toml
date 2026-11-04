@@ -6,6 +6,8 @@ select = ["ALL"]
 ignore = [
   "COM812",  # missing-trailing-comma
   "PGH004",
+  "PLR09",  # too many ...
+  "TC003",  # only import no TYPE_CHECKING
   "CPY",
   "ANN401",
   "ERA",
