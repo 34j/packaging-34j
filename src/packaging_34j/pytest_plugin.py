@@ -78,7 +78,7 @@ def _install_defaults(config: Any) -> Path | None:
     )
     option.cov_report = getattr(option, "cov_report", None) or {"term": None, "xml": None}
     try:
-        from pytest_cov.plugin import CovPlugin  # noqa: PLC0415
+        from pytest_cov.plugin import CovPlugin
     except ImportError:
         return package_path
     config.pluginmanager.register(CovPlugin(option, config.pluginmanager), "_cov")
