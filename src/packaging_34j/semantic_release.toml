@@ -3,7 +3,7 @@ version_toml = ["pyproject.toml:project.version"]
 build_command = """
 pip install uv
 uv lock
-prek run -a
+uvx prek run -a
 git add uv.lock
 uv build
 """
