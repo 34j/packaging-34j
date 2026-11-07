@@ -1,5 +1,6 @@
 line-length = 100
 preview = true
+unsafe-fixes = true
 
 [lint]
 select = ["ALL"]
@@ -23,6 +24,16 @@ ignore = [
   "TD002",  # Missing author in TODO `# TODO(<author_name>): ...`
   "TD003",  # missing-todo-link
   "TRY003",  # raise-vanilla-args
+  "N8",
+  "C901",
+  "PLC0415",
+  "PLR2004",
+  "PLC2701",
+  "PGH003",
+  "B019",
+  "SLF001",
+  "RUF067",
+  "PLR6301"
 ]
 fixable = ["ALL"]
 # Allow unused variables when underscore-prefixed.
