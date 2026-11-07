@@ -14,6 +14,7 @@ from sybil.parsers.rest import PythonCodeBlockParser as ReSTPythonCodeBlockParse
 from sybil.parsers.rest import SkipParser as ReSTSkipParser
 
 markdown_examples = Sybil(
+    path=Path.cwd().as_posix(),
     parsers=[
         MarkdownDocTestParser(NUMBER),
         MarkdownPythonCodeBlockParser(doctest_optionflags=NUMBER),
@@ -24,6 +25,7 @@ markdown_examples = Sybil(
 )
 
 rest_examples = Sybil(
+    path=Path.cwd().as_posix(),
     parsers=[
         ReSTDocTestParser(NUMBER),
         ReSTPythonCodeBlockParser(),
