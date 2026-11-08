@@ -1,6 +1,7 @@
 line-length = 100
 preview = true
-unsafe-fixes = true
+# unsafe-fixes = true # too dangerous, causing numpy hard-to-debug troubles
+output-prefer-rule-codes = true
 
 [lint]
 select = ["ALL"]
@@ -33,7 +34,14 @@ ignore = [
   "B019",
   "SLF001",
   "RUF067",
-  "PLR6301"
+  "PLR6301",
+  "PD013",  # false positive for array api
+  "E741",  # incompatible with math code
+  "DOC501",
+  "DOC201",  # incompatible with one-line docstring
+  "TRY004",
+  "D401",  # imperative mood???
+  "PLR6104"  # incomptaible with numpy
 ]
 fixable = ["ALL"]
 # Allow unused variables when underscore-prefixed.
